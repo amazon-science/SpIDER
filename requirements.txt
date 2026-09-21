@@ -1,0 +1,27 @@
+# Core runtime -- everything `python -m spider.run_api` needs.
+# Versions are the ones the released numbers were produced with; nearby
+# versions work fine.
+openai>=1.40,<2          # ChatClient (OpenAI / Azure / vLLM transports)
+httpx>=0.27              # ResponsesAPIClient
+networkx>=3.1            # repository graphs are nx.MultiDiGraph
+numpy>=1.24
+
+# Data preparation (data_prep/) -- not needed if you already have a score pickle.
+datasets>=2.19           # pulls problem statements + gold patches from the Hub
+bm25s>=0.2               # lexical scores stored alongside the dense ranking
+PyStemmer>=2.2           # bm25s tokenizer stemmer
+unidiff>=0.7             # gold-patch parsing for the LocAgent GT view
+tqdm>=4.65
+
+# Getting the data -- SpIDER-Bench ships as parquet and is rebuilt into the
+# {instance_id}.pkl graphs the pipeline reads (scripts/materialize_graphs.py).
+huggingface_hub>=0.23
+pyarrow>=14
+
+# Stage 1 of data preparation (embedding graph nodes) additionally needs:
+#   torch>=2.1
+#   transformers>=4.40
+# Skip both if you use the *.npz embeddings shipped with SpIDER-Bench.
+
+# The local-model runner (spider/run_vllm.py) additionally needs:
+#   vllm>=0.6

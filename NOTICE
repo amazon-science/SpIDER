@@ -1,1 +1,6 @@
 Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+
+This product includes software developed at LocAgent
+(https://github.com/gersteinlab/LocAgent), licensed under the Apache License,
+Version 2.0. Portions of `data_prep/parse_patch.py` and the ground-truth
+construction in `data_prep/compute_issue_node_scores.py` are adapted from it.
