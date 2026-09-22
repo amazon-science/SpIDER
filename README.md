@@ -408,11 +408,14 @@ artifacts are ours. It matters when someone hands you a `.pkl` and asks you to s
 ## Citation
 
 ```bibtex
-@article{chaudhari2024spider,
-    title={SpIDER: Spatially Informed Dense Embedding Retrieval for Software Issue Localization},
-    author={Chaudhari, Shravan and Jacob, Rahul Thomas and Goswami, Mononito and Cao, Jiajun and Rashid, Shihab and Bock, Christian},
-    journal={arXiv preprint arXiv:2512.16956},
-    year={2024}
+@misc{chaudhari2026spiderspatiallyinformeddense,
+      title={SpIDER: Spatially Informed Dense Embedding Retrieval for Software Issue Localization}, 
+      author={Shravan Chaudhari and Rahul Thomas Jacob and Mononito Goswami and Jiajun Cao and Shihab Rashid and Christian Bock},
+      year={2026},
+      eprint={2512.16956},
+      archivePrefix={arXiv},
+      primaryClass={cs.SE},
+      url={https://arxiv.org/abs/2512.16956}, 
 }
 ```
 
