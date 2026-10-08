@@ -1,7 +1,20 @@
 # SpIDER — Spatially Informed Dense Embedding Retrieval
 
-Reference implementation of the SpIDER issue-localization loop
-([arXiv:2512.16956](https://arxiv.org/abs/2512.16956)), plus the data-preparation
+[![EMNLP 2026](https://img.shields.io/badge/EMNLP-2026%20Main-1f6feb.svg)](https://2026.emnlp.org)
+[![Paper](https://img.shields.io/badge/arXiv-2512.16956-b31b1b.svg)](https://arxiv.org/abs/2512.16956)
+[![Dataset](https://img.shields.io/badge/%F0%9F%A4%97%20Dataset-SpIDER--Bench-ffd21e.svg)](https://huggingface.co/datasets/AmazonScience/SpIDER-Bench)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
+
+**[SpIDER: Spatially Informed Dense Embedding Retrieval for Software Issue Localization](https://arxiv.org/abs/2512.16956)**<br>
+Shravan Chaudhari, Rahul Thomas Jacob, Jiajun Cao, Shihab Rashid, Mononito Goswami, Christian Bock<br>
+*EMNLP 2026 (Main Conference)*
+
+> 🎉 SpIDER has been accepted to the **EMNLP 2026 Main Conference**. The
+> [SpIDER-Bench](https://huggingface.co/datasets/AmazonScience/SpIDER-Bench) graphs are
+> available on the Hugging Face Hub.
+
+Reference implementation of the SpIDER issue-localization loop from our EMNLP 2026
+paper ([arXiv:2512.16956](https://arxiv.org/abs/2512.16956)), plus the data-preparation
 chain and the summarizer that produce the reported tables.
 
 SpIDER starts from a dense retrieval ranking over a repository's code graph and
@@ -74,7 +87,7 @@ SpIDER needs two things per benchmark instance:
 
 | what | where it comes from |
 |---|---|
-| **repository graph** — `{instance_id}.pkl`, an `nx.MultiDiGraph` whose nodes carry `type` / `code` / `start_line` / `end_line` and whose edges carry `type` ∈ {`contains`, `imports`, `inherits`, `invokes`} | SpIDER-Bench on the Hub, rebuilt from parquet (below) |
+| **repository graph** — `{instance_id}.pkl`, an `nx.MultiDiGraph` whose nodes carry `type` / `code` / `start_line` / `end_line` and whose edges carry `type` ∈ {`contains`, `imports`, `inherits`, `invokes`} | [SpIDER-Bench](https://huggingface.co/datasets/AmazonScience/SpIDER-Bench) on the Hub, rebuilt from parquet (below) |
 | **score pickle** — the dense ranking over those nodes, plus ground truth | you build it (below), or reuse ours |
 
 Both are Python pickles, which run code when loaded — see [Security](#security) before
@@ -82,8 +95,8 @@ loading either from a source you don't control.
 
 ### 1. Graphs
 
-SpIDER-Bench is published as **parquet**, so it loads with `datasets` and renders in the
-Hub dataset viewer. The pipeline wants `nx.MultiDiGraph` pickles, so downloading it is two
+[SpIDER-Bench](https://huggingface.co/datasets/AmazonScience/SpIDER-Bench) is published as
+**parquet**, so it loads with `datasets` and renders in the Hub dataset viewer. The pipeline wants `nx.MultiDiGraph` pickles, so downloading it is two
 steps — download, then rebuild. `download_bench.py` does both:
 
 ```bash
@@ -115,8 +128,8 @@ data/SpIDER-Bench/SWE-bench_Verified/{instance_id}.pkl
 data/SpIDER-Bench/Multi-SWE-bench/{java,javascript,typescript}/{instance_id}.pkl
 ```
 
-Budget ~7 GB for the parquet and ~73 GB for the rebuilt pickles. `--no-keep-parquet` drops
-the former once the latter exist.
+Budget ~7 GB for the parquet and ~73 GB for the rebuilt pickles.
+`download_bench.py --no-keep-parquet` drops the former once the latter exist.
 
 <details>
 <summary>Parquet layout, if you want to read the graphs directly</summary>
@@ -407,21 +420,21 @@ artifacts are ours. It matters when someone hands you a `.pkl` and asks you to s
 
 ## Citation
 
+If you use SpIDER or SpIDER-Bench, please cite our EMNLP 2026 paper:
+
 ```bibtex
-@misc{chaudhari2026spiderspatiallyinformeddense,
-      title={SpIDER: Spatially Informed Dense Embedding Retrieval for Software Issue Localization}, 
-      author={Shravan Chaudhari and Rahul Thomas Jacob and Mononito Goswami and Jiajun Cao and Shihab Rashid and Christian Bock},
+@inproceedings{chaudhari2026spiderspatiallyinformeddense,
+      title={SpIDER: Spatially Informed Dense Embedding Retrieval for Software Issue Localization},
+      author={Shravan Chaudhari and Rahul Thomas Jacob and Jiajun Cao and Shihab Rashid and Mononito Goswami and Christian Bock},
+      booktitle={Proceedings of the 2026 Conference on Empirical Methods in Natural Language Processing (EMNLP)},
       year={2026},
-      eprint={2512.16956},
-      archivePrefix={arXiv},
-      primaryClass={cs.SE},
-      url={https://arxiv.org/abs/2512.16956}, 
+      url={https://arxiv.org/abs/2512.16956},
 }
 ```
 
 ---
 
-## Security
+## Reporting security issues
 
 See [CONTRIBUTING](CONTRIBUTING.md#security-issue-notifications) for more information.
 
